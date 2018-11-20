@@ -1,0 +1,81 @@
+var couponState = function(item) {
+  if (item.coupon_state == 0) {
+    return "可使用";
+  }
+  if (item.coupon_state == 1) {
+    return "已使用";
+  }
+  if (item.coupon_state == 2) {
+    return "已过期";
+  }
+  if (item.coupon_state == 3) {
+    return "被锁定";
+  }
+  if (item.coupon_state == 4) {
+    return "失效";
+  }
+}
+var orderCardState = function(item) {
+  if (item == 0) {
+    return "未使用";
+  }
+  if (item == 1) {
+    return "已使用";
+  }
+  if (item == 2) {
+    return "已过期";
+  }
+  if (item == 3) {
+    return "已失效";
+  }
+}
+var orderRefundSate = function(state) {
+  if (state == 0) {
+    return "退款中"
+  }
+  if (state == 1) {
+    return "已退款"
+  }
+  if (state == 2) {
+    return "退款"
+  }
+  if (state == 3) {
+    return "不可退款"
+  }
+}
+
+
+var formatNumber = function(n) {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+
+var regYear = getRegExp("(y+)", "i");
+
+
+var fmtTime = function(time, type = "second") {
+  if (!time && time == null) {
+    return ""
+  } else {
+    var timer = getDate(time * 1000);
+    // console.log(timer)
+    var year = timer.getFullYear()
+    var month = timer.getMonth() + 1
+    var day = timer.getDate()
+    var hour = timer.getHours()
+    var minute = timer.getMinutes()
+    var second = timer.getSeconds()
+    if (type == "second") {
+      return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+    } else {
+      return [year, month, day].map(formatNumber).join('/')
+    }
+  }
+}
+
+module.exports = {
+  couponState: couponState,
+  fmtTime: fmtTime,
+  orderCardState: orderCardState,
+  orderRefundSate: orderRefundSate
+};

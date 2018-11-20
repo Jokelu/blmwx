@@ -1,0 +1,5 @@
+<view class='card'>
+  <image src='../../../images/icon-vip.png'></image>
+  <view class='card_desc'>便丽猫会员ID: {{cardId}}</view>
+  <view class='card_desc'>便丽猫官方公众号</view>
+</view>

@@ -1,0 +1,108 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.3.0",
+	"appid": "wx06fee44f576b389d",
+	"projectname": "blm",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 10,
+			"list": [
+				{
+					"id": 0,
+					"name": "order",
+					"pathName": "pages/user/order/order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "user",
+					"pathName": "pages/user/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "login",
+					"pathName": "pages/login/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "coupon",
+					"pathName": "pages/user/coupon/coupon",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "authorize",
+					"pathName": "pages/authorize/authorize",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "share",
+					"pathName": "pages/share/share",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "use",
+					"pathName": "pages/index/use/use",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "shareGift",
+					"pathName": "pages/index/shareGift/shareGift",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "newUser",
+					"pathName": "pages/index/newUser/newUser",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "custom",
+					"pathName": "pages/user/custom/custom",
+					"query": ""
+				},
+				{
+					"id": 10,
+					"name": "index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": "1011"
+				}
+			]
+		}
+	}
+}

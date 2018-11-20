@@ -1,0 +1,27 @@
+<view class='share'>
+  <view class='shareImg'>
+    <image src='../../../images/banner-2.jpg'></image>
+  </view>
+  <view class='share_min'>
+    <view class='share_t'>分享美味，分享好心情！</view>
+    <view class='share_m'>好友享美味，你也有份</view>
+    <button class='btn' open-type='share' data-unionid='{{unionId}}'>
+      <image src='../../../images/icon_weixin.png'></image>
+    </button>
+    <view class='share_b'>点击分享微信好友~</view>
+  </view>
+  <view class='activeRule'>
+    活动细则
+  </view>
+  <view class='rule_desc'>
+    <view>
+      1、被转发的新用户输入手机号并注册，即可获赠一张便丽猫原味冰激凌兑换券（仅限1件商品）；
+    </view>
+    <view>2、您推荐的新用户只要关注便丽猫微信公众号，并产生任意金额消费（包括商品兑换券），您即获得一张便丽猫原味冰激凌兑换券；</view>
+    <view>3、您推荐的新用户同一手机设备、同一微信ID，仅可领取一次；</view>
+    <view>
+      4、您邀请好友所获赠的优惠券仅限本人使用，禁止商业牟利；</view>
+    <view>
+      5、上述赠送的优惠券，有效日期为自领取日起30天。</view>
+  </view>
+</view>

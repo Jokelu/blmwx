@@ -1,0 +1,63 @@
+<view class='details'>
+  <swiper class='swiper' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular indicator-active-color="#fed916">
+    <block wx:for="{{imgUrls}}" wx:key="index">
+      <swiper-item>
+        <image src="{{baseImg+item.pictureUrl}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='goods_desc'>
+    <view class='desc'>
+      <view class='goods_name'>{{commercialInfo.name || ''}}</view>
+      <view class='goods_ins'>{{commercialInfo.desciption || ''}}</view>
+      <view class='goods_ins'>{{commercialInfo.sellingPoint || ''}}</view>
+      <view class='originP'>
+        <text style='font-size:16px'>￥</text>{{goodsInfo.price}}</view>
+    </view>
+    <view class='format' bindtap='selectModel'>
+      <view>
+        <text>已选择：</text>
+        <text>{{goodsInfo.skuName}}</text>
+      </view>
+      <view>
+        <image src='../../../images/iocn_sanjiao.png'></image>
+      </view>
+    </view>
+    <image class='goods_info' mode='widthFix' wx:for="{{detailPicture}}" wx:key="{{index}}" src='{{baseImg+item.pictureUrl}}'></image>
+    <navigator class='use' hover-class='none' url="/pages/index/use/use">使用须知</navigator>
+    <!-- <view class='goods_buy' bindtap='payment'>
+      <image src='../../../images/icon_buy.png'></image>
+    </view> -->
+  </view>
+</view>
+<view class='mask' hidden='{{!isShow}}' bindtap='hidden'></view>
+<view class='pop {{isShow?"isPop":""}}'>
+  <view class='goods_price'>
+    <view class='goods_base'>
+      <image src='{{baseImg+selectSku}}'></image>
+      <view class='now_price'>
+        <text class='new_price' style='margin-left:5px;'>￥{{goodsInfo.price}}</text>
+        <!-- <text class='old_price'>原价:{{commercialInfo.primePrice}}</text> -->
+      </view>
+    </view>
+    <view class='close'>
+      <image bindtap='close' src='../../../images/iocn_guanbi.png'></image>
+    </view>
+  </view>
+  <view class='taocan'>
+    <view class='goods_select'>选择商品</view>
+    <view class='goods_list'>
+      <view class='goods_item {{currentIndex == index ? "active": ""}}' wx:for="{{specificationList}}" data-index='{{index}}' bindtap='goodsSelect' data-info='{{item}}' wx:key="index">{{item.skuName }}</view>
+    </view>
+    <view class='price'>
+      <!-- <text class='old'>原价{{goodsInfo.primePrice}}</text> -->
+      <view class='number' wx:if='{{commercialInfo.classifyId == 2}}'>
+        <image src='../../../images/icon-jian.png' bindtap='reduce'></image>
+        <text class='count'>{{count}}</text>
+        <image src='../../../images/icon-jia.png' bindtap='add'></image>
+      </view>
+    </view>
+  </view>
+  <image mode='widthFix' class='sure' bindtap='payment' src='../../../images/sure.png'></image>
+</view>
+<image mode='widthFix' class='goods_buy' bindtap='buy' src='../../../images/icon_buy.png'></image>

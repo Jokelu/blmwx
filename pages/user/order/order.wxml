@@ -1,0 +1,68 @@
+<wxs module="common" src="../../../utils/common.wxs"></wxs>
+<view class='order'>
+  <view wx:if="{{orderList.length}}" class='order_item' wx:for="{{orderList}}" wx:key="index" wx:for-item="row">
+    <view class='title'>
+      <text style='color:#909090'>下单时间:{{common.fmtTime(row.orderPlus.createDatetime) }}</text>
+      <!-- <view style='color:#fed407'>可使用</view> -->
+      <button open-type='share' hidden='{{!row.orderPlus.shareFlag}}' data-img='{{baseImg+row.orderPlus.sharePictureUrl}}' data-orderId='{{row.orderPlus.orderId}}'>
+        <image src='../../../images/icon-fenxiang-2.png'></image>
+      </button>
+    </view>
+    <view class='order_desc' bindtap='toGoodsInfo' data-id='{{row.orderPlus.productId}}'>
+      <image src='{{baseImg+row.orderPlus.sharePictureUrl}}'></image>
+      <view class='order_desc_info'>
+        <view class='od'>
+          <text style='color:#333;font-size:15px'>{{row.orderPlus.productName}}</text>
+          <text style='font-size:16px'>总价:<text style='color:#fed407;font-size:16px'> {{row.orderPlus.productTotalPrice|| ''}}</text></text>
+        </view>
+        <view class='od'>
+          <text style='font-size:10px'>订单号: {{row.orderPlus.orderId }}</text>
+          <text></text>
+        </view>
+        <view class='od'>
+          <text style='color:#f00'>剩余{{row.orderPlus.availableCount}}次</text>
+          <text class='od_date'>截止时间：{{common.fmtTime(row.orderPlus.expDate,'second') }}</text>
+        </view>
+      </view>
+    </view>
+    <view class='code_list' data-item='{{row.cardVoucherList.length}}' style='height:{{row.cardVoucherList.length<=3? row.cardVoucherList.length*45:row.codeHeight }}px'>
+      <view wx:for="{{row.cardVoucherList}}" wx:key="index" class='row' data-cardVoucherId='{{item.cardVoucherId}}' bindtap='showCode' data-img='{{baseImg+row.orderPlus.sharePictureUrl}}' data-code='{{item.cardVoucherCode}}' data-refund='{{row.orderPlus.shareFlag}}'
+        data-title='{{item.cardVoucherName}}' data-state='{{item.deliveryCodeState}}'>
+        <text>{{item.cardVoucherName}}</text>
+        <text>{{item.cardVoucherCode}}</text>
+        <text>{{common.orderCardState(item.deliveryCodeState) }}</text>
+        <image src='../../../images/icon-erweima.png'></image>
+      </view>
+    </view>
+    <view class='down'>
+      <!-- <navigator url=''></navigator> -->
+      <block wx:if="{{row.cardVoucherList.length > 3}}">
+        <image bindtap='isShow' style='transform:rotate({{row.rotate_deg}}deg)' data-index='{{index}}' src='../../../images/icon-xia.png'></image>
+      </block>
+      <text class='refund {{row.orderPlus.refundState == 2?"":"refunded"}}' bindtap='refund' data-id='{{row.orderPlus.orderId}}' data-state='{{row.orderPlus.refundState}}' wx:if="{{row.orderPlus.refundState != 3 }}">{{common.orderRefundSate(row.orderPlus.refundState)}}</text>
+    </view>
+  </view>
+  <view class='nothing' wx:if="{{!orderList.length}}">
+    亲！还没有订单？快去买买买吧~~~
+  </view>
+</view>
+<view hidden="{{!showMask}}" class='mask' catchtap='hideCode'>
+
+</view>
+<view class='toast' hidden="{{!showMask}}" animation="{{animationData}}">
+  <view class='toast_tit'>
+    <text class='toast_name'>{{cardVoucherTitle}}</text>
+    <view class='share'>
+      <button class='share_btn' open-type="share" data-img='{{shareImg}}' data-cardVoucherid='{{cardVoucherId}}'>
+        <image class='share_img' src='../../../images/icon-fenxiang-1.png'></image>
+      </button>
+
+    </view>
+  </view>
+  <view class='erweima'>
+    <canvas style="width: 220px; height: 220px;" canvas-id="myQrcode"></canvas>
+    <!-- <image src='../../../images/erweima.png'></image> -->
+  </view>
+  <view class='erweima_code'>兑换码：{{cardVoucherCode}}</view>
+  <view class='erweima_desc'>在设备扫描或输入即可领取</view>
+</view>

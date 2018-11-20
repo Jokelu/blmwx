@@ -1,0 +1,14 @@
+<view class='newUser'>
+  <view class='banner'>
+    <image src='../../../images/banner.jpg'></image>
+  </view>
+  <view class='content'>
+    <view class='con-t'>好友邀你享受美味啦</view>
+    <button class='btn' bindtap='getRecive'>享受美味</button>
+    <view class='shibie'>长按识别二维码</view>
+    <view class='code'>
+      <image bindtap='previewImage' data-src='{{imgalist}}' src='{{imgalist}}'></image>
+    </view>
+    <view class='more'>享受更多美味，享受更多优惠</view>
+  </view>
+</view>

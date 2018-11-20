@@ -1,0 +1,12 @@
+<view class='tel'>
+  <!-- <web-view class='item' src="https://v.bianlimall.com/h5/customer.html">
+
+  </web-view> -->
+  <view class='cont'>
+    <view>您可以通过搜索便丽猫公众号</view>
+    <view>或拨打便丽猫客服电话 联系客服</view>
+    <view class='phone' bindtap='call'>
+      <image class='tel_icon' src='../../../images/phone.png'></image> 400-660-1678 </view>
+  </view>
+
+</view>

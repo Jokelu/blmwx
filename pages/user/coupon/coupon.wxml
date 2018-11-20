@@ -1,0 +1,46 @@
+<wxs module="common" src="../../../utils/common.wxs">
+</wxs>
+<view class="coupon">
+  <view class='coupon_item' wx:for="{{cardList}}" wx:key="{{index}}">
+    <view class='title'>
+      <text>{{item.title || ''}}</text>
+      <view class='state {{item.coupon_state==0?"":"active"}}'>{{common.couponState(item) || ""}}</view>
+    </view>
+    <view class='coupon_con' bindtap='showCode' data-code='{{item}}'>
+      <image class='coupon_img' src='{{baseImg+item.img}}'></image>
+      <view class='coupon_desc'>
+        <text style='margin-bottom:10px'>有效期至 {{common.fmtTime(item.expiretime,'day') || ""}}</text>
+        <text style='color:#f00'>{{item.description || ""}}</text>
+      </view>
+      <image hidden='{{item.coupon_type!=1}}' class='ercode' src='../../../images/icon-erweima.png'></image>
+    </view>
+    <view class='useMethod'>
+      <view class='methodTit' bindtap='onDescShow' data-index='{{index}}'>
+        <text>使用规则</text>
+        <image style='transform:rotate({{item.rotate_deg}}deg)' src='../../../images/right.png'></image>
+      </view>
+      <view class='useDesc' style='height:{{item.descHeight}}px'>
+        <text>有效门店：{{item.shop_list_name|| "盒马鲜生外全部门店"}}</text>
+        <text>有效日期：{{common.fmtTime(item.begintime,'day')||""}}-{{common.fmtTime(item.expiretime,'day')||""}}</text>
+        <text>有效商品：{{item.item_id_name||"门店内全部商品"}}</text>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{!cardList.length}}" class='nothing'>
+    您还没有优惠券呢
+  </view>
+</view>
+<view hidden="{{!showMask}}" class='mask' catchtap='hideCode'>
+
+</view>
+<view class='toast' hidden="{{!showMask}}" animation="{{animationData}}">
+  <view class='toast_tit'>
+    <text class='toast_name'>{{code_name}}</text>
+  </view>
+  <view class='erweima'>
+    <canvas style="width: 220px; height: 220px;" canvas-id="myQrcode"></canvas>
+    <!-- <image src='../../../images/erweima.png'></image> -->
+  </view>
+  <view class='erweima_code'>兑换码：{{coupon_code}}</view>
+  <view class='erweima_desc'>在设备扫描或输入即可领取</view>
+</view>

@@ -1,0 +1,27 @@
+<!--index.wxml-->
+<view class="home">
+  <swiper class='swiper' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular indicator-active-color="#fed916">
+    <block wx:for="{{imgUrls}}" wx:key="index">
+      <swiper-item>
+        <image src="{{baseImg+item.pictureUrl}}" bindtap='toDetail' data-url='{{item.linkUrl}}' class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='goods'>
+    <view class='goods_item' wx:for="{{goodsInfo}}" wx:key="index" wx:for-item="row">
+      <view class='goods_title'>{{row.commercialClass.name}}</view>
+      <view class='goods_info'>
+        <view data-url="{{item}}" bindtap='getGoodsDetail' class='item' wx:key="index" wx:for="{{row.commercialInfoList}}">
+          <view class='goods_image'>
+            <image src='{{baseImg+item.imgUrl}}'></image>
+          </view>
+
+          <view class='goods_desc'>
+            <text class='tip'>{{item.name}}</text>
+            <!-- <text class='price'>{{item.price}}元</text> -->
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,33 @@
+.authorize {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+image {
+  width: 128rpx;
+  height: 128rpx;
+  margin-top: 20%;
+  border-radius: 50%;
+}
+
+.apply {
+  font-weight: 600;
+  margin-top: 8%;
+}
+
+.info {
+  color: #666;
+  margin-top: 10px;
+}
+
+.btn {
+  width: 80%;
+  margin-top: 20px;
+  background: #fed916;
+  line-height: 2.3;
+  font-size: 17px;
+}

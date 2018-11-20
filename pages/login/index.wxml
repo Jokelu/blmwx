@@ -1,0 +1,26 @@
+<!--index.wxml-->
+<view class="login">
+  <image class='login_banner' src='../../images/banner.jpg'></image>
+  <view class='form'>
+    <view class='form_label'>手机号码</view>
+    <input class='phone' type='number' bindinput="userPhoneInput" maxlength="{{11}}" focus value="{{phone}}" placeholder="请输入11位手机号码" placeholder-style="color:#aaa"></input>
+  </view>
+  <view class='form'>
+    <view class='form_label'>手机验证码</view>
+    <view class='login_code'>
+      <input class='code' value='{{phoneCode}}' bindinput="userPhoneCodeInput" placeholder="请输入手机验证码" placeholder-style="color:#aaa"></input>
+      <button disabled="{{disabled}}" class='login_get' bindtap='getPhoneCode'>
+        <text style='color:#fed916' wx:if="{{isGetCode}}">获取验证码</text>
+        <text wx:if="{{!isGetCode}}">重新获取({{time}}s)</text>
+      </button>
+    </view>
+  </view>
+  <view class='submitView'>
+    <button class='submit' bindtap='submit'>确认</button>
+  </view>
+  <!-- <view class='more'>
+    <view></view>
+    <image></image>
+    <text>享受更多美味，享受更多优惠</text>
+  </view> -->
+</view>

@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/goodsInfo/index",
+    "pages/index/shareGift/shareGift",
+    "pages/index/newUser/newUser",
+    "pages/index/use/use",
+    "pages/login/index",
+    "pages/user/index",
+    "pages/user/order/order",
+    "pages/user/custom/custom",
+    "pages/user/card/card",
+    "pages/user/coupon/coupon",
+    "pages/user/telme/telme",
+    "pages/share/share",
+    "pages/authorize/authorize",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "便丽猫鲜生活",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#ffcd29",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "text": "会员商城",
+        "pagePath": "pages/index/index",
+        "iconPath": "./images/icon_shancgheng_01.png",
+        "selectedIconPath": "./images/icon_shancgheng_02.png"
+      },
+      {
+        "text": "个人中心",
+        "pagePath": "pages/user/index",
+        "iconPath": "./images/icon_gerenzhongxin_01.png",
+        "selectedIconPath": "./images/icon_gerenzhongxin_02.png"
+      }
+    ]
+  }
+}

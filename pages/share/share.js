@@ -6,39 +6,46 @@ Page({
    */
   data: {
     baseUrl: app.globalData.baseUrl,
-    success: "../../images/moren.png",
-    shibai: "../../images/icon-shibai.png",
-    chongfu: "../../images/icon-chongfu.png",
+    success: "../../images/giftBox.png",
     options: {},
-    msg: '成为会员领取',
+    msg: '好友邀你享用',
     userInfo: {},
-    reciveMsg: "点击领取",
-    reciveState: false
+    reciveMsg: "享受美味",
+    reciveState: false,
+    showModel: false
+  },
+  close: function() {
+    this.setData({
+      showModel: false
+    })
   },
   goto: function() {
     const that = this
     let res = this.data.userInfo
+    console.log(res)
     if (!res.authorizedFlag) {
       wx.navigateTo({
         url: '/pages/authorize/authorize',
       })
+    } else {
+      this.getShareOrder(res.unionid)
     }
-    if (res.authorizedFlag && !res.memberFlag) {
-      wx.navigateTo({
-        url: '/pages/login/index?delta=1',
+    // if (res.authorizedFlag && !res.memberFlag) {
+    //   wx.navigateTo({
+    //     url: '/pages/login/index?delta=1',
+    //   })
+    // }
+
+  },
+  getRecive: function() {
+    if (this.data.reciveState) {
+      wx.switchTab({
+        url: '/pages/user/index',
       })
-    }
-    if (res.authorizedFlag && res.memberFlag) {
-      if (this.data.reciveState) {
-        wx.redirectTo({
-          url: '/pages/user/coupon/coupon',
-        })
-      }else {
-        wx.switchTab({
-          url: '/pages/index/index',
-        })
-      }
-      
+    } else {
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
     }
   },
   /**
@@ -46,28 +53,38 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      options: options
+      options: options,
+      msg: this.data.msg + (options.name || "")
     })
-    // const that = this
-    // app.getAuthKey().then(function(res) {
-    //   console.log(res)
-    //   that.setData({
-    //     userInfo: res
-    //   })
-    // })
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo
+      })
+      // this.getShareOrder(app.globalData.userInfo.unionid)
+    } else {
+      wx.showLoading({
+        title: '加载中',
+      })
+      app.userInfoReadyCallback = res => {
+        if (res) {
+          wx.hideLoading()
+        }
+        this.setData({
+          userInfo: res
+        })
+        if (res.authorizedFlag) {
+          // this.getShareOrder(res.unionid)
+        } else {
+          // this.setData({
+          //   msg: "好友邀你享用",
+          //   success: "../../images/giftBox.png",
+          //   reciveMsg: "点击领取"
+          // })
+        }
+      }
+    }
   },
-  // getAuthorize() {
-  //   const {
-  //     globalData
-  //   } = getApp()
-  //   return new Promise((resolve, reject) => {
-  //     if(globalData.userInfo) {
-  //       resolve(global.userInfo)
-  //     }else {
 
-  //     }
-  //   })
-  // },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -75,54 +92,65 @@ Page({
 
   },
 
+  getShareOrder: function(unionid) {
+    wx.request({
+      url: `${this.data.baseUrl}/order/shareOrder`,
+      data: {
+        shareUnionId: this.data.options.unionid,
+        getUnionId: unionid,
+        orderId: this.data.options.id,
+        shareType: this.data.options.type
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: 'POST',
+      success: (res) => {
+        console.log(res)
+        if (res.data.resultCode == 'SUCCEED') {
+          this.setData({
+            msg: '领取成功',
+            success: "../../images/icon-chenggong.png",
+            reciveMsg: "享用美味",
+            reciveState: true,
+            showModel: true
+          })
+        } else if (res.data.resultCode == 'FAILED') {
+          this.setData({
+            msg: res.data.data,
+            success: "../../images/icon-shibai.png",
+            reciveMsg: "前往商城",
+            showModel: true
+          })
+        } else if (res.data.resultCode == 'RECLAIM') {
+          this.setData({
+            msg: res.data.data,
+            success: "../../images/icon-chongfu.png",
+            reciveMsg: "前往商城",
+            showModel: true
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    const that = this
-    app.getAuthKey().then(function(res) {
-      that.setData({
-        userInfo: res
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo
       })
-      if (res.memberFlag) {
-        wx.request({
-          url: `${that.data.baseUrl}/order/shareOrder`,
-          data: {
-            shareUnionId: that.data.options.unionid,
-            getUnionId: res.unionid,
-            orderId: that.data.options.id,
-            shareType: that.data.options.type
-          },
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          method: 'POST',
-          success: function(res) {
-            console.log(res)
-            if (res.data.resultCode == 'SUCCEED') {
-              that.setData({
-                msg: '领取成功',
-                success: "../../images/icon-chenggong.png",
-                reciveMsg: "享用美味",
-                reciveState: true
-              })
-            } else if (res.data.resultCode == 'FAILED') {
-              that.setData({
-                msg: res.data.data,
-                success: "../../images/icon-shibai.png",
-                reciveMsg: "前往商城"
-              })
-            } else if (res.data.resultCode == 'RECLAIM') {
-              that.setData({
-                msg: res.data.data,
-                success: "../../images/icon-chongfu.png",
-                reciveMsg: "前往商城"
-              })
-            }
-          }
-        })
-      }
-    })
+    }
+    // if (app.globalData.userInfo) {
+    //   this.getShareOrder(app.globalData.userInfo.unionid)
+    // } else {
+    //   this.setData({
+    //     msg: "好友邀你享用",
+    //     success: "../../images/giftBox.png",
+    //     reciveMsg: "点击领取"
+    //   })
+    // }
   },
 
   /**

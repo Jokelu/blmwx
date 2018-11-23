@@ -20,7 +20,7 @@
 .goods {
   width: 100%;
   box-sizing: border-box;
-  padding:20px 15px;
+  padding: 20px 15px;
 }
 
 .goods_item {
@@ -33,7 +33,8 @@
   color: #333;
   padding: 0px 0 15px 8px;
 }
-.goods_title::before{
+
+.goods_title::before {
   content: "";
   position: absolute;
   left: 0;
@@ -42,6 +43,7 @@
   height: 40rpx;
   background: #fed916;
 }
+
 .goods_info {
   width: 100%;
   display: flex;
@@ -80,9 +82,48 @@
   height: 90px;
   border-radius: 12px;
 }
-.goods_image image{
+
+.goods_image image {
   width: 100%;
   height: 100%;
   overflow: hidden;
   border-radius: 12px;
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 300;
+}
+
+.popContent {
+  position: relative;
+}
+
+.giftPop {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.close {
+  width: 32px;
+  margin-top: -20px;
+}
+
+.gift {
+  width: 300px;
+}
+
+.reciveBtn {
+  background: #fff;
 }

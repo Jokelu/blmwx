@@ -1,7 +1,6 @@
 const app = getApp()
 import drawQrcode from '../../../utils/weapp.qrcode.esm.js'
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -22,7 +21,9 @@ Page({
     cuttentIndex: null,
     heightStyle: "135",
     cardVoucherCode: "",
-    cardVoucherTitle:""
+    cardVoucherTitle: "",
+    itemName: "",
+    reqState: false
   },
   isShow: function(e) {
     let index = e.target.dataset.index
@@ -40,6 +41,7 @@ Page({
       })
     }
   },
+  // 商品详情链接
   toGoodsInfo: function(el) {
     let id = el.currentTarget.dataset.id
     if (id) {
@@ -55,7 +57,8 @@ Page({
     let cardVoucherCode = option.currentTarget.dataset.code
     let cardVoucherTitle = option.currentTarget.dataset.title
     this.setData({
-      shareImg: option.currentTarget.dataset.img
+      shareImg: option.currentTarget.dataset.img,
+      itemName: option.currentTarget.dataset.name,
     })
     if (state == 0 && refundState) {
       drawQrcode({
@@ -142,27 +145,29 @@ Page({
   },
   onShareAppMessage: function(res) {
     console.log(res)
+    let data = res.target.dataset
     var unionid = app.globalData.userInfo.unionid
-    let shareImg = res.target.dataset.img
+    let shareImg = data.img // 分享图片地址
+    let itemName = data.name // 分享图片地址
     if (res.from === 'menu') {
       // 来自页面内转发按钮
       return {
         title: '便丽猫请你来尝鲜！',
-        path: '/pages/share/share?id=123',
+        path: '/pages/index/index',
       }
     } else if (res.from === 'button') {
       let ids = ""
       let type = ""
-      if (res.target.dataset.orderid) {
-        ids = res.target.dataset.orderid
-        type = 1
-      } else if (res.target.dataset.cardvoucherid) {
-        ids = res.target.dataset.cardvoucherid
+      if (data.orderid) {
+        ids = data.orderid // 分享是订单的id
+        type = 1 // 分享类型  1 订单  0 卡券
+      } else if (data.cardvoucherid) {
+        ids = data.cardvoucherid // 分享是卡券的id
         type = 0
       }
       return {
         title: '便丽猫请你来尝鲜！',
-        path: '/pages/share/share?id=' + ids + '&unionid=' + unionid + '&type=' + type,
+        path: '/pages/share/share?id=' + ids + '&unionid=' + unionid + '&type=' + type + '&name=' + itemName,
         imageUrl: shareImg
       }
     }
@@ -191,7 +196,6 @@ Page({
       },
       success: (res) => {
         if (res.data.resultCode == "SUCCEED") {
-          wx.hideLoading()
           let data = res.data.data.map(item => {
             return Object.assign(item, {
               rotate_deg: 0,
@@ -200,8 +204,10 @@ Page({
             })
           })
           that.setData({
-            orderList: data
+            orderList: data,
+            reqState: true
           })
+          wx.hideLoading()
         } else {
           wx.hideLoading()
           wx.showToast({
@@ -209,7 +215,11 @@ Page({
             icon: "none"
           })
         }
-        console.log(res)
+      },
+      complete: () => {
+        that.setData({
+          reqState: true
+        })
       }
     })
   },
@@ -263,10 +273,4 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  // onShareAppMessage: function() {
-
-  // }
 })

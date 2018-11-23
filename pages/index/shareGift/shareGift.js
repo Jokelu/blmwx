@@ -67,13 +67,13 @@ Page({
       // 来自页面内转发按钮
       return {
         title: '便丽猫请你来尝鲜！',
-        path: '/pages/index/newUser/newUser?unionId=' + this.data.unionId,
+        path: '/pages/index/index?unionId=' + this.data.unionId,
         imageUrl: "../../../images/shareimg.jpg"
       }
     } else if (res.from === 'button') {
       return {
         title: '便丽猫请你来尝鲜！',
-        path: '/pages/index/newUser/newUser?unionId=' + this.data.unionId,
+        path: '/pages/index/index?unionId=' + this.data.unionId,
         imageUrl: "../../../images/shareimg.jpg"
       }
     }

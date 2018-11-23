@@ -9,11 +9,13 @@
   </view>
   <view class='card'>
     <view class='card_list'>
-      <view data-url='order/order' class='item' bindtap='getOrderList'>
+      <view data-url='order/order' class='item' bindtap='getOrderList' style='position:relative'>
+        <view class='couponCount' wx:if="{{couponCount.availableOrderNum != 0 && hasUserInfo}}">{{couponCount.availableOrderNum}}</view>
         <image src='../../images/icon_dingdan.png'></image>
         <text>订单</text>
       </view>
-      <view data-url='coupon/coupon' class='item' bindtap='getOrderList'>
+      <view data-url='coupon/coupon' class='item' bindtap='getOrderList' style='position:relative'>
+        <view class='couponCount' wx:if="{{couponCount.availableCouponNum != 0 && hasUserInfo}}">{{couponCount.availableCouponNum}}</view>
         <image src='../../images/icon_youhuiquan.png'></image>
         <text>优惠券</text>
       </view>
@@ -21,10 +23,6 @@
         <image src='../../images/icon_huiyuanka.png'></image>
         <text>会员卡</text>
       </view>
-      <!-- <web-view class='item' src="https://v.bianlimall.com/h5/customer.html">
-        <image src='../../images/icon_lianxikefu.png'></image>
-        <text>联系客服</text>
-      </web-view> -->
       <view data-url='custom/custom' class='item' bindtap='getOrderList'>
         <image src='../../images/icon_lianxikefu.png'></image>
         <text>联系客服</text>
@@ -33,5 +31,5 @@
   </view>
 </view>
 <view class='account' style="width:100%;background:gray;">
- <official-account style=""></official-account>
+  <official-account style=""></official-account>
 </view>

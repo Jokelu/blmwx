@@ -7,7 +7,7 @@ Page({
   data: {
     userInfo: {},
     baseUrl: app.globalData.baseUrl,
-    imgalist: 'http://oss.bianlimall.com/member/228f3634e55a4b2c950a2402b0dc027c.png',
+    // imgalist: 'http://oss.bianlimall.com/member/228f3634e55a4b2c950a2402b0dc027c.png',
     shareUnionId: ""
   },
   previewImage: function(e) {
@@ -21,7 +21,7 @@ Page({
     let userInfo = this.data.userInfo
     if (!userInfo.authorizedFlag) {
       wx.navigateTo({
-        url: '/pages/authorize/authorize?shareUnionId=' + this.data.shareUnionId,
+        url: '/pages/authorize/authorize',
       })
     }
     if (userInfo.authorizedFlag && !userInfo.memberFlag) {

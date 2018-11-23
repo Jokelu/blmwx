@@ -256,7 +256,6 @@
 .now_price {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
 }
 
@@ -268,7 +267,8 @@
 
 .now_price .old_price {
   font-size: 13px;
-  color: #666;
+  color: #f00;
+  margin-left: 6px;
 }
 
 .close image {

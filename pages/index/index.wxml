@@ -15,7 +15,6 @@
           <view class='goods_image'>
             <image src='{{baseImg+item.imgUrl}}'></image>
           </view>
-
           <view class='goods_desc'>
             <text class='tip'>{{item.name}}</text>
             <!-- <text class='price'>{{item.price}}元</text> -->
@@ -24,4 +23,12 @@
       </view>
     </view>
   </view>
+</view>
+
+<view class='mask' wx:if="{{showModel}}" bindtap='close'>
+
+</view>
+<view class='giftPop' wx:if="{{showModel}}">
+  <image class='gift' bindtap='getGift' mode='widthFix' src='../../images/gift.png'></image>
+  <image class='close' bindtap='close' mode='widthFix' src='../../images/close.png'></image>
 </view>

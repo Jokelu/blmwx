@@ -6,26 +6,29 @@ Page({
    */
   data: {
     baseUrl: app.globalData.baseUrl,
-    shareUnionId: ""
+    loginFlag: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (options.shareUnionId) {
+    if (options.loginFlag) {
       this.setData({
-        shareUnionId: options.shareUnionId
+        loginFlag: options.loginFlag
+      })
+    } else {
+      this.setData({
+        loginFlag: false
       })
     }
-    console.log(options)
+    console.log(this.data.loginFlag)
   },
   getUserInfo: function(e) {
     const that = this
     var sessionKey = app.globalData.userInfo.sessionKey
     var unionid = app.globalData.userInfo.unionid
-    console.log(sessionKey)
-    // app.globalData.userInfo = e.detail.userInfo
+    var shareUnionId = wx.getStorageSync('shareUnionId')
     wx.request({
       url: `${this.data.baseUrl}/user/getUserAuthorization`,
       data: {
@@ -39,11 +42,12 @@ Page({
       method: 'POST',
       success: (res) => {
         if (res.data.resultCode == "SUCCEED") {
-          if (that.data.shareUnionId) {
+          app.globalData.userInfo = res.data.data
+          if (shareUnionId) {
             wx.request({
               url: `${this.data.baseUrl}/user/recommendUser`,
               data: {
-                shareUnionId: this.data.shareUnionId,
+                shareUnionId: shareUnionId,
                 getUnionId: unionid,
               },
               header: {
@@ -51,10 +55,8 @@ Page({
               },
               method: 'POST',
               success: function(result) {
-                console.log(result)
                 if (result.data.resultCode == "SUCCEED") {
-                  app.globalData.userInfo = res.data.data
-                  if (!res.data.data.memberFlag) {
+                  if (!res.data.data.memberFlag && that.data.loginFlag) {
                     wx.navigateTo({
                       url: `/pages/login/index?delta=2`,
                     })
@@ -67,7 +69,7 @@ Page({
               }
             })
           } else {
-            if (!res.data.data.memberFlag) {
+            if (!res.data.data.memberFlag && that.data.loginFlag) {
               wx.navigateTo({
                 url: `/pages/login/index?delta=2`,
               })
@@ -77,11 +79,11 @@ Page({
               })
             }
           }
+        } else {
+          that.setData({
+            userInfo: null,
+          })
         }
-        // that.setData({
-        //   userInfo: res.data.data,
-        //   hasUserInfo: true
-        // })
       }
     })
   },

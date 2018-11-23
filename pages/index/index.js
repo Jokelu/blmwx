@@ -7,7 +7,7 @@ Page({
     baseUrl: app.globalData.baseUrl,
     baseImg: app.globalData.baseImg,
     imgUrls: [],
-    userInfo: {},
+    userInfo: null,
     goodsInfo: [],
     hasUserInfo: false,
     loadingHidden: false,
@@ -15,19 +15,27 @@ Page({
     duration: 100,
     autoplay: true,
     interval: 3000,
+    showModel: false
   },
 
   toDetail: function(option) {
     let url = option.currentTarget.dataset.url
-    console.log(app.globalData.userInfo)
     if (url == "share") {
-      wx.navigateTo({
-        url: 'shareGift/shareGift',
-      })
+      if (app.globalData.userInfo.memberFlag) {
+        wx.navigateTo({
+          url: 'shareGift/shareGift',
+        })
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '只有便丽猫会员才能参与本活动哟',
+          showCancel: false
+        })
+      }
     } else if (url == "regist") {
       if (!app.globalData.userInfo.authorizedFlag) {
         wx.navigateTo({
-          url: '/pages/authorize/authorize',
+          url: '/pages/authorize/authorize?loginFlag=1',
         })
       } else if (app.globalData.userInfo.memberFlag) {
         wx.navigateTo({
@@ -62,9 +70,52 @@ Page({
   hideLoading: () => {
     wx.hideLoading()
   },
+  close: function() {
+    this.setData({
+      showModel: false
+    })
+  },
+  getGift: function() {
+    if (!app.globalData.userInfo.authorizedFlag) {
+      wx.navigateTo({
+        url: '/pages/authorize/authorize?loginFlag=1',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/index',
+      })
+    }
 
-  onLoad: function() {
-
+  },
+  onLoad: function(options) {
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo
+      })
+      if (!app.globalData.userInfo.memberFlag) {
+        this.setData({
+          showModel: true
+        })
+      }
+    } else {
+      app.userInfoReadyCallback = res => {
+        if (res) {
+          this.setData({
+            userInfo: res
+          })
+          if (!res.memberFlag) {
+            this.setData({
+              showModel: true
+            })
+          }
+        }
+      }
+    }
+    if (options.unionId) {
+      wx.setStorageSync('shareUnionId', options.unionId)
+    } else {
+      wx.setStorageSync('shareUnionId', "")
+    }
   },
   onShow: function() {
     wx.request({
@@ -83,5 +134,17 @@ Page({
         })
       }
     })
+    console.log(app.globalData.userInfo)
+    if (app.globalData.userInfo) {
+      if (!app.globalData.userInfo.memberFlag) {
+        this.setData({
+          showModel: true
+        })
+      } else {
+        this.setData({
+          showModel: false
+        })
+      }
+    }
   },
 })

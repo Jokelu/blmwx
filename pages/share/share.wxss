@@ -34,7 +34,7 @@ page {
   flex-direction: column;
 }
 
-.share_state .state {
+ .state {
   font-size: 16px;
   margin-top: 22px;
   color: rgb(51, 51, 51);
@@ -47,7 +47,7 @@ page {
   border-top: dashed 1px #ccc;
 }
 
-.share_state .btn {
+ .btn {
   width: 200px;
   height: 50px;
   color: #000;
@@ -103,4 +103,37 @@ page {
   width: 65px;
   height: 1px;
   background: #999;
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 300;
+}
+
+.giftPop {
+  width: 280px;
+  height: 330px;
+  background: #fff;
+  border-radius: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.reciveState {
+  width: 120px;
+  height: 120px;
+  margin-top: 18px;
 }

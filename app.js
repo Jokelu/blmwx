@@ -70,8 +70,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    // baseUrl: "https://dev.bianlimall.com",
-    baseUrl: "https://v.bianlimall.com/member",
+    baseUrl: "https://dev.bianlimall.com",
+    // baseUrl: "https://v.bianlimall.com/member",
     baseImg: "https://bianlimall-public.oss-cn-beijing.aliyuncs.com/",
   }
 })

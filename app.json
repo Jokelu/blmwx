@@ -11,7 +11,6 @@
     "pages/user/custom/custom",
     "pages/user/card/card",
     "pages/user/coupon/coupon",
-    "pages/user/telme/telme",
     "pages/share/share",
     "pages/authorize/authorize",
     "pages/logs/logs"

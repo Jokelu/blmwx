@@ -89,7 +89,7 @@ Page({
             icon: "none"
           })
           wx.navigateTo({
-            url: '/pages/authorize/authorize',
+            url: '/pages/authorize/authorize?loginFlag=1',
           })
         } else if (userInfo.authorizedFlag && !userInfo.memberFlag) {
           this.setData({
@@ -120,13 +120,12 @@ Page({
                   signType: 'MD5',
                   paySign: res.data.data.paySign,
                   success(res) {
-                   
                     wx.navigateTo({
                       url: '/pages/user/order/order',
                     })
                   },
                   fail(res) {
-                    
+
                   },
                   complete() {
                     that.setData({

@@ -3,19 +3,31 @@
     <image src='../../images/banner.jpg'></image>
   </view> -->
   <view class='share_state'>
-    <image src='{{success}}'></image>
+    <image src='../../images/giftBox.png'></image>
     <view class='state'>
-      {{msg}}
+      {{"好友邀你享用"+(options.name||'')}}
     </view>
     <view class='line'></view>
-    <button class='btn' bindtap='goto'>{{reciveMsg}}</button>
+    <!-- <button class='btn' wx:if="{{!userInfo.authorizedFlag}}" bindtap='getRecive'>点击领取</button> -->
+    <button class='btn' bindtap='goto'>点击领取</button>
   </view>
-  <view class='rule'>优惠规则</view>
+  <view class='rule'>活动规则</view>
   <view class='desc'>
-    <text>1、被转发的新用户输入手机号并注册，即可获赠一张便丽猫原味冰激凌兑换券（仅限1件商品）；关注便丽猫生活号即可获赠额外新人大礼包一份，内含3元抵扣券两张（满5元可用），5元抵扣券两张（满15元可用）；</text>
-    <text>2、您推荐的新用户只要关注便丽猫微信公众号，并产生任意金额消费（纯商品兑换券除外），您即获得一张便丽猫原味冰激凌兑换券；</text>
-    <text>3、您推荐的新用户同一手机设备、同一微信ID，仅可领取一次；</text>
-    <text>4、您邀请好友所获赠的优惠券仅限本人使用，禁止商业牟利；</text>
-    <text> 5、上述赠送的优惠券，有效日期为自领取日起30天。</text>
+    <text>1、被分享的用户完成注册流程后即可额外获得便丽猫原味冰激凌兑换券（仅限一件商品）</text>
+    <text>2、您推荐的新用户只要关注便丽猫微信公众号，并产生任意金额消费（纯商品兑换券除外），您即获得一张便丽猫原味冰激凌兑换券</text>
+    <text>3、您推荐的新用户同一手机设备、同一微信ID，仅可领取一次</text>
+    <text>4、您邀请好友所获赠的优惠券仅限本人使用，禁止商业牟利</text>
+    <text> 5、上述赠送的优惠券，有效日期为自领取日起30天</text>
   </view>
+</view>
+<view class='mask' wx:if="{{showModel}}" bindtap='close'>
+
+</view>
+<view class='giftPop' wx:if="{{showModel}}">
+  <image class='reciveState' src='{{success}}'></image>
+  <view class='state'>
+    {{msg}}
+  </view>
+  <view class='line'></view>
+  <button style='margin-top:6px;' class='btn' bindtap='getRecive'>{{reciveMsg}}</button>
 </view>

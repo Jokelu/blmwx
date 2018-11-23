@@ -71,9 +71,25 @@ page {
   width: 60rpx;
   height: 60rpx;
 }
-.account{
+
+.account {
   position: fixed;
   bottom: 0px;
   left: 0;
   z-index: 1000;
+}
+
+.couponCount {
+  position: absolute;
+  top: -4px;
+  right: 20px;
+  width: 15px;
+  height: 15px;
+  border: solid 1px #f00;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  line-height: 15px;
+  background: #f00;
 }

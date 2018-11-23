@@ -38,6 +38,7 @@
       <view class='now_price'>
         <text class='new_price' style='margin-left:5px;'>￥{{goodsInfo.price}}</text>
         <!-- <text class='old_price'>原价:{{commercialInfo.primePrice}}</text> -->
+        <text class='old_price' wx:if="{{commercialInfo.productType==1}}">关注便丽猫公众号可享</text>
       </view>
     </view>
     <view class='close'>

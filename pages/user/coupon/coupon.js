@@ -14,7 +14,8 @@ Page({
     coupon_code: "",
     code_name: "",
     showMask: false,
-    animationData: {}
+    animationData: {},
+    reqState: false
   },
 
   /**
@@ -55,6 +56,11 @@ Page({
             icon: "none"
           })
         }
+      },
+      complete: () => {
+        that.setData({
+          reqState: true
+        })
       },
       fail: function(err) {
         wx.showToast({

@@ -8,7 +8,7 @@ Page({
     userInfo: {},
     phone: '',
     phoneCode: "",
-    time: 60,
+    time: 59,
     isGetCode: true,
     hasUserInfo: false,
     loadingHidden: false,
@@ -95,15 +95,23 @@ Page({
         success: function(res) {
           if (res.data.resultCode == "SUCCEED") {
             app.globalData.userInfo = res.data.data
+            let backUser = wx.getStorageSync("backUser")
             wx.showToast({
               title: "登录成功",
               icon: 'none',
               duration: 2000
             })
             if (that.data.delta) {
-              wx.navigateBack({
-                delta: that.data.delta
-              })
+              if (backUser) {
+                wx.switchTab({
+                  url: '/pages/user/index',
+                })
+                wx.removeStorageSync('backUser')
+              } else {
+                wx.navigateBack({
+                  delta: that.data.delta
+                })
+              }
             }
           } else {
             wx.showToast({
@@ -139,15 +147,26 @@ Page({
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
       })
     }
   },
-  getUserInfo: function(e) {
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  // 注册页统计
+  registCount: function() {
+    let unionid = app.globalData.userInfo.unionid
+    wx.request({
+      url: `${this.data.baseUrl}/uv/registrationPage`,
+      data: {
+        unionId: unionid,
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: 'POST',
+      success: function(res) {
+      },
     })
+  },
+  onShow: function() {
+    this.registCount()
   }
 })

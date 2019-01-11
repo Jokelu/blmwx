@@ -4,6 +4,7 @@
   </web-view> -->
   <image class='bg' src='../../../images/callCustomImg.jpg'></image>
   <image mode='widthFix' class='call' bindtap='call' src='../../../images/callCustom.png'></image>
+  <!-- <button class='cusBtn' open-type="contact" bindcontact="handleContact">联系客服</button> -->
   <!-- <view class='cont'>
     <view>您可以通过搜索便丽猫公众号</view>
     <view>或拨打便丽猫客服电话 联系客服</view>

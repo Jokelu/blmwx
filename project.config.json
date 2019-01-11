@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 12,
 			"list": [
 				{
 					"id": 0,
@@ -99,6 +99,20 @@
 					"id": 10,
 					"name": "index",
 					"pathName": "pages/index/index",
+					"query": "",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "activity",
+					"pathName": "pages/activity/activity",
+					"query": "",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "card",
+					"pathName": "pages/user/card/card",
 					"query": "",
 					"scene": "1011"
 				}

@@ -7,6 +7,7 @@
       </swiper-item>
     </block>
   </swiper>
+  <view class='guide' bindtap='guide'><image src='../../images/notice.png'></image> 点这儿关注便丽猫公众号，享受更多优惠哦！</view>
   <view class='goods'>
     <view class='goods_item' wx:for="{{goodsInfo}}" wx:key="index" wx:for-item="row">
       <view class='goods_title'>{{row.commercialClass.name}}</view>
@@ -29,6 +30,6 @@
 
 </view>
 <view class='giftPop' wx:if="{{showModel}}">
-  <image class='gift' bindtap='getGift' mode='widthFix' src='../../images/gift.png'></image>
+  <image class='gift' bindtap='getGift' mode='widthFix' src='{{baseImg+activityImg}}'></image>
   <image class='close' bindtap='close' mode='widthFix' src='../../images/close.png'></image>
 </view>

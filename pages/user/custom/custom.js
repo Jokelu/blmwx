@@ -10,6 +10,9 @@ Page({
     wx.makePhoneCall({
       phoneNumber: '400-660-1678' //仅为示例，并非真实的电话号码
     })
+    // wx.navigateTo({
+    //   url: '/pages/activity/activity?aid=1007',
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -17,7 +20,10 @@ Page({
   onLoad: function(options) {
 
   },
-
+  handleContact(e) {
+    console.log(e.path)
+    console.log(e.query)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

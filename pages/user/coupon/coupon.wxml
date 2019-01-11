@@ -6,8 +6,8 @@
       <text>{{item.title || ''}}</text>
       <view class='state {{item.coupon_state==0?"":"active"}}'>{{common.couponState(item) || ""}}</view>
     </view>
-    <view class='coupon_con' bindtap='showCode' data-code='{{item}}'>
-      <image class='coupon_img' src='{{baseImg+item.img}}'></image>
+    <view class='coupon_con' bindtap='showCode'  data-info='{{item}}'>
+      <image class='coupon_img' mode='widthFix' src='{{baseImg+item.img}}'></image>
       <view class='coupon_desc'>
         <text style='margin-bottom:10px'>有效期至 {{common.fmtTime(item.expiretime,'day') || ""}}</text>
         <text style='color:#f00'>{{item.description || ""}}</text>
@@ -30,17 +30,13 @@
     您还没有优惠券呢!
   </view>
 </view>
-<view hidden="{{!showMask}}" class='mask' catchtap='hideCode'>
-
-</view>
-<view class='toast' hidden="{{!showMask}}" animation="{{animationData}}">
+<blm-dialog class="dialog" isShow="{{showMask}}">
   <view class='toast_tit'>
     <text class='toast_name'>{{code_name}}</text>
   </view>
   <view class='erweima'>
     <canvas style="width: 220px; height: 220px;" canvas-id="myQrcode"></canvas>
-    <!-- <image src='../../../images/erweima.png'></image> -->
   </view>
   <view class='erweima_code'>兑换码：{{coupon_code}}</view>
   <view class='erweima_desc'>在设备扫描或输入即可领取</view>
-</view>
+</blm-dialog>

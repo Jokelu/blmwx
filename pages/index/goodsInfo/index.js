@@ -21,7 +21,8 @@ Page({
     price: 0,
     isShow: false,
     selectSku: "",
-    payState: true
+    payState: true,
+    pruductid: ""
   },
   goodsSelect: function(e) {
     // 选择商品切换价格
@@ -30,7 +31,7 @@ Page({
       goodsInfo: e.target.dataset.info,
       count: 1,
       price: e.target.dataset.info.price,
-      selectSku: e.target.dataset.info.skuPictureUrl
+      selectSku: e.target.dataset.info.skuPictureUrl,
     })
   },
   selectModel: function() {
@@ -162,10 +163,14 @@ Page({
       title: '拼命加载中',
       mask: true
     })
+    this.setData({
+      pruductid: options.id
+    })
     wx.request({
       url: `${this.data.baseUrl}/mall/productDetail`,
       data: {
-        productCode: options.id
+        productCode: options.id,
+        showChannel: 1
       },
       success: (res) => {
         if (res.data.resultCode == "SUCCEED") {
@@ -236,5 +241,15 @@ Page({
    */
   onReachBottom: function() {
 
+  },
+  onShareAppMessage: function(res) {
+    console.log(res)
+    if (res.from === 'menu') {
+      // 来自页面内转发按钮
+      return {
+        title: '便丽猫请你来尝鲜！',
+        path: '/pages/index/goodsInfo/index?id=' + this.data.pruductid,
+      }
+    }
   },
 })

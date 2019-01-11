@@ -5,17 +5,56 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cardId:""
+    cardId: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let cardno = app.globalData.userInfo.cardno
-    this.setData({
-      cardId: cardno
+    wx.showLoading({
+      title: '加载中',
     })
+    if (app.globalData.userInfo) {
+      wx.hideLoading()
+      if (!app.globalData.userInfo.authorizedFlag) {
+        wx.navigateTo({
+          url: '/pages/authorize/authorize?loginFlag=1',
+        })
+      } else if (!app.globalData.userInfo.memberFlag) {
+        wx.navigateTo({
+          url: '/pages/login/index',
+        })
+      } else {
+        let cardno = app.globalData.userInfo.cardno
+        this.setData({
+          cardId: cardno
+        })
+      }
+    } else {
+      app.userInfoReadyCallback = res => {
+        if (res) {
+          wx.hideLoading()
+          if (!res.authorizedFlag) {
+            wx.navigateTo({
+              url: '/pages/authorize/authorize?loginFlag=1',
+            })
+          } else if (!res.memberFlag) {
+            wx.navigateTo({
+              url: '/pages/login/index',
+            })
+          } else {
+            let cardno = res.cardno
+            this.setData({
+              cardId: cardno
+            })
+          }
+        } else {
+          wx.hideLoading()
+        }
+      }
+    }
+
   },
 
   /**
@@ -29,7 +68,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    if (app.globalData.userInfo) {
+      let cardno = app.globalData.userInfo.cardno
+      this.setData({
+        cardId: cardno
+      })
+    }
   },
 
   /**

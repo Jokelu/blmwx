@@ -84,6 +84,12 @@
   line-height: 55px;
 }
 
+.activityInfo {
+  color: #f00;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
 .goods_ins {
   font-size: 13px;
   color: #999;
@@ -267,8 +273,15 @@
 
 .now_price .old_price {
   font-size: 13px;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 10px;
+}
+
+.guanzhu {
+  font-size: 13px;
   color: #f00;
-  margin-left: 6px;
+  margin-left: 10px;
 }
 
 .close image {

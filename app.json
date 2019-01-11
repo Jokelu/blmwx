@@ -5,6 +5,7 @@
     "pages/index/shareGift/shareGift",
     "pages/index/newUser/newUser",
     "pages/index/use/use",
+    "pages/index/guide/guide",
     "pages/login/index",
     "pages/user/index",
     "pages/user/order/order",
@@ -13,6 +14,7 @@
     "pages/user/coupon/coupon",
     "pages/share/share",
     "pages/authorize/authorize",
+    "pages/activity/activity",
     "pages/logs/logs"
   ],
   "window": {

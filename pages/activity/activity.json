@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "活动领券",
+  "usingComponents": {
+    "blm-dialog": "../components/dialog/dialog"
+  }
+}

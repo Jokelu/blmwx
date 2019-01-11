@@ -1,0 +1,6 @@
+<view hidden='{{!isShow}}' >
+  <view class='dialog-mask {{isShow?"isActive":""}}' bindtap='hidden'></view>
+  <view class='dialog-content'>
+    <slot></slot>
+  </view>
+</view>

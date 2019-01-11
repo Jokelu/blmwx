@@ -1,7 +1,6 @@
 //index.js
 //获取应用实例
 const app = getApp()
-// const baseUrl = "https://dev.bianlimall.com"
 Page({
   data: {
     baseUrl: app.globalData.baseUrl,
@@ -10,12 +9,13 @@ Page({
     userInfo: null,
     goodsInfo: [],
     hasUserInfo: false,
-    loadingHidden: false,
-    indicatorDots: true,
+    indicatorDots: true, //  轮播参数
     duration: 100,
     autoplay: true,
     interval: 3000,
-    showModel: false
+    showModel: false,
+    activityImg: "",
+    showActive: false
   },
 
   toDetail: function(option) {
@@ -62,61 +62,63 @@ Page({
       })
     }
   },
-  showLoading: () => {
-    wx.showLoading({
-      title: '加载中。。。',
-    })
-  },
-  hideLoading: () => {
-    wx.hideLoading()
-  },
+
+
   close: function() {
     this.setData({
       showModel: false
     })
   },
+  guide: function() {
+    wx.navigateTo({
+      url: '/pages/index/guide/guide',
+    })
+  },
   getGift: function() {
     if (!app.globalData.userInfo.authorizedFlag) {
+      wx.setStorageSync("backUser", true)
       wx.navigateTo({
         url: '/pages/authorize/authorize?loginFlag=1',
       })
     } else {
+      wx.setStorageSync("backUser", true)
       wx.navigateTo({
         url: '/pages/login/index',
       })
     }
-
   },
   onLoad: function(options) {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo
-      })
-      if (!app.globalData.userInfo.memberFlag) {
-        this.setData({
-          showModel: true
-        })
-      }
-    } else {
-      app.userInfoReadyCallback = res => {
-        if (res) {
-          this.setData({
-            userInfo: res
-          })
-          if (!res.memberFlag) {
-            this.setData({
-              showModel: true
-            })
-          }
-        }
-      }
-    }
     if (options.unionId) {
       wx.setStorageSync('shareUnionId', options.unionId)
     } else {
       wx.setStorageSync('shareUnionId', "")
     }
   },
+  getAcitivity() {
+    wx.request({
+      url: `${this.data.baseUrl}/mall/homePageActive`,
+      success: (res) => {
+        if (res.data.data) {
+          this.setData({
+            activityImg: res.data.data.pictureUrl,
+            showActive: true
+          })
+          if (app.globalData.userInfo) {
+            if (!app.globalData.userInfo.memberFlag) {
+              this.setData({
+                showModel: true
+              })
+            } else {
+              this.setData({
+                showModel: false
+              })
+            }
+          }
+        }
+      }
+    })
+  },
+
   onShow: function() {
     wx.request({
       url: `${this.data.baseUrl}/mall/banner`,
@@ -134,16 +136,38 @@ Page({
         })
       }
     })
-    console.log(app.globalData.userInfo)
+    this.getAcitivity()
     if (app.globalData.userInfo) {
-      if (!app.globalData.userInfo.memberFlag) {
+      this.setData({
+        userInfo: app.globalData.userInfo
+      })
+      if (!app.globalData.userInfo.memberFlag && this.data.showActive) {
         this.setData({
           showModel: true
         })
-      } else {
-        this.setData({
-          showModel: false
-        })
+      }
+    } else {
+      app.userInfoReadyCallback = res => {
+        if (res) {
+          this.setData({
+            userInfo: res
+          })
+          if (!res.memberFlag && this.data.showActive) {
+            this.setData({
+              showModel: true
+            })
+          }
+        }
+      }
+    }
+    // console.log(app.globalData.userInfo)
+  },
+  onShareAppMessage: function(res) {
+    if (res.from === 'menu') {
+      // 来自页面内转发按钮
+      return {
+        title: '便丽猫请你来尝鲜！',
+        path: '/pages/index/index',
       }
     }
   },

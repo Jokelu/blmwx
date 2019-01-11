@@ -1,0 +1,3 @@
+<view class='guide'>
+  <image class='guideImg' mode='' src='../../../images/guide.jpg'></image>
+</view>

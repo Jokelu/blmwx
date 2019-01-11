@@ -121,12 +121,11 @@ Page({
               },
               success: function(res) {
                 if (res.data.resultCode == 'SUCCEED') {
-                  that.getOrderList()
+                  that.getOrderList(app.globalData.userInfo.unionid)
                   wx.showToast({
                     title: '退款成功',
                     icon: "none"
                   })
-
                 } else {
                   wx.showToast({
                     title: '退款失败',
@@ -177,14 +176,38 @@ Page({
    */
   onLoad: function(options) {
     const that = this
-    wx.showShareMenu({
-      withShareTicket: true
+    wx.showLoading({
+      title: '加载中',
     })
-    this.getOrderList()
+    if (app.globalData.userInfo) {
+      wx.hideLoading()
+      if (!app.globalData.userInfo.authorizedFlag) {
+        wx.navigateTo({
+          url: '/pages/authorize/authorize',
+        })
+      } else {
+        let unionid = app.globalData.userInfo.unionid
+        that.getOrderList(unionid)
+      }
+    } else {
+      app.userInfoReadyCallback = res => {
+        if (res) {
+          wx.hideLoading()
+          if (!res.authorizedFlag) {
+            wx.navigateTo({
+              url: '/pages/authorize/authorize',
+            })
+          } else {
+            that.getOrderList(res.unionid)
+          }
+        } else {
+          wx.hideLoading()
+        }
+      }
+    }
   },
-  getOrderList: function() {
+  getOrderList: function(unionid) {
     const that = this
-    let unionid = app.globalData.userInfo.unionid
     wx.showLoading({
       title: '拼命加载中',
       mask: true
@@ -234,6 +257,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    if (app.globalData.userInfo) {
+      this.getOrderList(app.globalData.userInfo.unionid)
+    }
     // console.log(app.globalData.userInfo)
     // this.setData({
     //   userInfo: app.globalData.userInfo

@@ -24,6 +24,10 @@ Page({
         wx.navigateTo({
           url: '/pages/authorize/authorize?loginFlag=1',
         })
+      } else if (currentItem == "custom/custom") {
+        wx.navigateTo({
+          url: currentItem,
+        })
       } else {
         wx.navigateTo({
           url: '/pages/authorize/authorize',

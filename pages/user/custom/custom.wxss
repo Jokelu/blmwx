@@ -22,3 +22,10 @@
   transform: translate3d(-50%, 0, 0);
   z-index: 200;
 }
+
+.cusBtn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+}

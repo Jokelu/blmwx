@@ -1,0 +1,68 @@
+.activity {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.coupon_list {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 1px;
+  font-size: 14px;
+}
+
+.itemName {
+}
+
+.itemDesc {
+}
+
+.btn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fed916;
+}
+.authorize {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+image {
+  width: 128rpx;
+  height: 128rpx;
+  margin-top: 20%;
+  border-radius: 50%;
+}
+
+.apply {
+  font-weight: 600;
+  margin-top: 8%;
+}
+
+.info {
+  color: #666;
+  margin-top: 10px;
+}
+
+.confirm {
+  width: 80%;
+  margin-top: 40px;
+  background: #fed916;
+  line-height: 2.3;
+  font-size: 17px;
+}

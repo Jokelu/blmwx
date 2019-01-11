@@ -1,0 +1,17 @@
+<view class='activity'>
+  <view class='coupon_list' wx:for="{{couponList}}" wx:key="{{index}}">
+    <view class='item'>
+      <view class='itemName'>{{item.title+"×"+item.givenum}}</view>
+      <view class='itemDesc'>{{item.description}}</view>
+    </view>
+  </view>
+  <button bindtap='toCoupon' class='btn'>{{msg}}</button>
+</view>
+<blm-dialog class="dialog" isShow="{{showMask}}">
+  <view class='authorize'>
+    <image src='../../images/blm.jpg'></image>
+    <view class='apply'>便丽猫申请获得以下权限：</view>
+    <view class='info'>获取你的公开信息(昵称，头像等)</view>
+    <button class='confirm' open-type="getUserInfo" bindgetuserinfo="getUserInfo">确认授权</button>
+  </view>
+</blm-dialog>

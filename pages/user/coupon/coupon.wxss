@@ -71,7 +71,7 @@
 .coupon_con .ercode {
   width: 40px;
   height: 40px;
-  margin-left: 30px;
+  margin-left: 50px;
 }
 
 .coupon_desc {
@@ -120,39 +120,12 @@
 .useDesc text {
   padding: 3px 0;
 }
-
 .nothing {
   text-align: center;
   margin-top: 50%;
   color: rgb(151, 148, 148);
 }
 
-.mask {
-  background: rgba(83, 82, 82, 0.774);
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  transition: all 0.3;
-  z-index: 100;
-}
-
-.toast {
-  width: 275px;
-  height: 350px;
-  font-size: 14px;
-  border-radius: 20px;
-  background: #fff;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  margin: -175px 0 0 -136px;
-  /* transform: translate3d(-50%, -50%, 0); */
-  z-index: 200;
-  display: flex;
-  flex-direction: column;
-}
 
 .toast_tit {
   display: flex;

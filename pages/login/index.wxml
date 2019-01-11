@@ -18,9 +18,19 @@
   <view class='submitView'>
     <button class='submit' bindtap='submit'>确认</button>
   </view>
-  <!-- <view class='more'>
-    <view></view>
-    <image></image>
-    <text>享受更多美味，享受更多优惠</text>
-  </view> -->
+  <view class='activeRule'>
+    活动细则
+  </view>
+  <view class='rule_desc'>
+    <view>新用户关注便丽猫公众号并注册便丽猫会员，获得新人大礼包，礼包内容如下：
+    </view>
+    <view>  （1）一张免费三选一兑换券（摩卡咖啡/现磨红豆饮/原味冰淇淋任选其一），可用于便丽猫线下门店兑换现制饮品；
+    </view>
+    <view>  （2）两张全品类3元代金券（满10元可用，限线下可用）；
+    </view>
+    <view>  （3）两张全品类5元代金券（满18元可用，限线下可用）；
+    </view>
+    <view>   以上赠品有效期为自领取之日起30天内有效，未关注便丽猫公众号的用户无法获得代金券，关注后即可获取；
+    </view>
+  </view>
 </view>

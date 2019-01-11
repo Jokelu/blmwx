@@ -22,7 +22,6 @@ Page({
   goto: function() {
     const that = this
     let res = this.data.userInfo
-    console.log(res)
     if (!res.authorizedFlag) {
       wx.navigateTo({
         url: '/pages/authorize/authorize',
@@ -72,15 +71,6 @@ Page({
         this.setData({
           userInfo: res
         })
-        if (res.authorizedFlag) {
-          // this.getShareOrder(res.unionid)
-        } else {
-          // this.setData({
-          //   msg: "好友邀你享用",
-          //   success: "../../images/giftBox.png",
-          //   reciveMsg: "点击领取"
-          // })
-        }
       }
     }
   },
@@ -142,15 +132,6 @@ Page({
         userInfo: app.globalData.userInfo
       })
     }
-    // if (app.globalData.userInfo) {
-    //   this.getShareOrder(app.globalData.userInfo.unionid)
-    // } else {
-    //   this.setData({
-    //     msg: "好友邀你享用",
-    //     success: "../../images/giftBox.png",
-    //     reciveMsg: "点击领取"
-    //   })
-    // }
   },
 
   /**
@@ -181,10 +162,4 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  // onShareAppMessage: function() {
-
-  // }
 })

@@ -8,7 +8,7 @@
   </swiper>
   <view class='goods_desc'>
     <view class='desc'>
-      <view class='goods_name'>{{commercialInfo.name || ''}}</view>
+      <view class='goods_name'>{{commercialInfo.name || ''}} <text class='activityInfo'>{{commercialInfo.activityInfo || ""}}</text> </view>
       <view class='goods_ins'>{{commercialInfo.desciption || ''}}</view>
       <view class='goods_ins'>{{commercialInfo.sellingPoint || ''}}</view>
       <view class='originP'>
@@ -37,8 +37,8 @@
       <image src='{{baseImg+selectSku}}'></image>
       <view class='now_price'>
         <text class='new_price' style='margin-left:5px;'>￥{{goodsInfo.price}}</text>
-        <!-- <text class='old_price'>原价:{{commercialInfo.primePrice}}</text> -->
-        <text class='old_price' wx:if="{{commercialInfo.productType==1}}">关注便丽猫公众号可享</text>
+        <text class='old_price' wx:if="{{commercialInfo.productType!=1 && goodsInfo.primePrice!=0}}">原价:{{goodsInfo.primePrice}}</text>
+        <text class='guanzhu' wx:if="{{commercialInfo.productType==1}}">关注便丽猫公众号可享</text>
       </view>
     </view>
     <view class='close'>
